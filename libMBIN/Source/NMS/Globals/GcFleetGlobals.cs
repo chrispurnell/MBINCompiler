@@ -9,8 +9,7 @@ namespace libMBIN.NMS.Globals
     public class GcFleetGlobals : NMSTemplate
     {
         /* 0x0000 */ public Vector3f FreighterCustomiserSunAngleAdjust;
-        [NMS(Size = 0x20)]
-        /* 0x0010 */ public string CivilianMPMissionGiverPuzzle;
+        /* 0x0010 */ public NMSString0x20A CivilianMPMissionGiverPuzzle;
         /* 0x0030 */ public float MaxPurchaseDistance;
         /* 0x0034 */ public float DistanceForPurchaseReset;
         /* 0x0038 */ public float CombatFrigateSpawnMinRange;
@@ -23,10 +22,7 @@ namespace libMBIN.NMS.Globals
         /* 0x0060 */ public int ExplorationPointsRequiredForScan;
         /* 0x0064 */ public GcInteractionDof FleetInteractionDepthOfField;
         /* 0x0078 */ public int PercentChangeOfFrigateBeingPurchasable;
-        [NMS(Size = 0x4, Ignore = true)]
-        /* 0x007C */ public byte[] Padding7C;
-        [NMS(Size = 0x20)]
-        /* 0x0080 */ public string FleetCommunicationOSDMessage;
+        /* 0x0080 */ public NMSString0x20A FleetCommunicationOSDMessage;
         /* 0x00A0 */ public int MinFrigateStatValue;
         /* 0x00A4 */ public int MaxFrigateStatValue;
         /* 0x00A8 */ public float MinFrigateDistanceFromFreighter;
@@ -46,8 +42,7 @@ namespace libMBIN.NMS.Globals
         /* 0x00F5 */ public bool ExpeditionsCompleteInstantly;
         /* 0x00F6 */ public bool ShowSeeds;
         /* 0x00F7 */ public bool DisablePlayerFleets;
-        [NMS(Size = 0x20)]
-        /* 0x00F8 */ public string DebugInterventionEvent;
+        /* 0x00F8 */ public NMSString0x20A DebugInterventionEvent;
         // 0x9 entries
         public enum ForceDebriefEntryTypeEnum { None, PrimarySuccess, PrimaryFailure, PrimaryDamage,
             SecondarySuccess, SecondaryFailure, SecondaryDamage, GenericSuccess, GenericFailure };
@@ -78,26 +73,16 @@ namespace libMBIN.NMS.Globals
         /* 0x01FC */ public float DespawnDelayIncreasePerFrigate;
         /* 0x0200 */ public float FrigatesPerSecondForInstantSpawn;
         /* 0x0204 */ public float HologramSwapSpeed;
-        [NMS(Size = 0x20)]
-        /* 0x0208 */ public string TerminalNeedsAssignmentPuzzleID;
-        [NMS(Size = 0x20)]
-        /* 0x0228 */ public string TerminalInterventionPuzzleID;
-        [NMS(Size = 0x20)]
-        /* 0x0248 */ public string TerminalDamagePuzzleID;
-        [NMS(Size = 0x20)]
-        /* 0x0268 */ public string TerminalActivePuzzleID;
-        [NMS(Size = 0x20)]
-        /* 0x0288 */ public string TerminalDebriefPuzzleID;
-        [NMS(Size = 0x20)]
-        /* 0x02A8 */ public string NeedFrigatesPuzzleID;
-        [NMS(Size = 0x20)]
-        /* 0x02C8 */ public string NewExpeditionsAvailablePuzzleID;
-        [NMS(Size = 0x20)]
-        /* 0x02E8 */ public string NeedExpeditionTerminalPuzzleID;
-        [NMS(Size = 0x20)]
-        /* 0x0308 */ public string NeedAvailableExpeditionTerminalPuzzleID;
-        [NMS(Size = 0x20)]
-        /* 0x0328 */ public string SelectExpeditionPuzzleID;
+        /* 0x0208 */ public NMSString0x20A TerminalNeedsAssignmentPuzzleID;
+        /* 0x0228 */ public NMSString0x20A TerminalInterventionPuzzleID;
+        /* 0x0248 */ public NMSString0x20A TerminalDamagePuzzleID;
+        /* 0x0268 */ public NMSString0x20A TerminalActivePuzzleID;
+        /* 0x0288 */ public NMSString0x20A TerminalDebriefPuzzleID;
+        /* 0x02A8 */ public NMSString0x20A NeedFrigatesPuzzleID;
+        /* 0x02C8 */ public NMSString0x20A NewExpeditionsAvailablePuzzleID;
+        /* 0x02E8 */ public NMSString0x20A NeedExpeditionTerminalPuzzleID;
+        /* 0x0308 */ public NMSString0x20A NeedAvailableExpeditionTerminalPuzzleID;
+        /* 0x0328 */ public NMSString0x20A SelectExpeditionPuzzleID;
         /* 0x0348 */ public int NumberOfExpeditionChoices;
         /* 0x034C */ public int ExpeditionDifficultyVariance;
         /* 0x0350 */ public float ExpeditionDifficultyIncreaseForEachAdditionalFrigate;
@@ -128,14 +113,9 @@ namespace libMBIN.NMS.Globals
         /* 0x0468 */ public float TimeBetweenDebriefLogsAppearing;
         /* 0x046C */ public float TimeBeforeDebriefLogsStart;
         /* 0x0470 */ public bool ShowMissingRewardDescriptions;
-        [NMS(Size = 0x7, Ignore = true)]
-        /* 0x0471 */ public byte[] Padding471;
-        [NMS(Size = 0x20)]
-        /* 0x0478 */ public string CommunicatorDamagePuzzleTableEntry;
-        [NMS(Size = 0x20)]
-        /* 0x0498 */ public string FrigateDamagePuzzleTableEntry;
-        [NMS(Size = 0x20)]
-        /* 0x04B8 */ public string FrigatePurchasePuzzleTableEntry;
+        /* 0x0478 */ public NMSString0x20A CommunicatorDamagePuzzleTableEntry;
+        /* 0x0498 */ public NMSString0x20A FrigateDamagePuzzleTableEntry;
+        /* 0x04B8 */ public NMSString0x20A FrigatePurchasePuzzleTableEntry;
         /* 0x04D8 */ public List<int> DifficultyModifier;
         /* 0x04E8 */ public List<GcExpeditionDebriefPunctuation> DebriefPunctuationList;
         /* 0x04F8 */ public GcExpeditionDurationValues ExpeditionDurations;

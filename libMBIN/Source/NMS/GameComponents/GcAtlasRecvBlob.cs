@@ -7,8 +7,7 @@ namespace libMBIN.NMS.GameComponents
     public class GcAtlasRecvBlob : NMSTemplate
     {
         public ulong ClientUserdata;
-        [NMS(Size = 0x20)]
-        public string Name;
+        public NMSString0x20 Name;
         public int DataTimestamp;
         [NMS(Size = 0x4, Ignore = true)]
         public byte[] Padding2C;

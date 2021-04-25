@@ -185,11 +185,7 @@ namespace libMBIN
                     reader.BaseStream.Position = endPos;
                     return template;
                 default:
-                    if ( fieldType == "Colour" ) { // TODO: not needed
-                        reader.Align( 0x10 );
-                    }
-
-                    if ( fieldType == "VariableStringSize" || fieldType == "GcRewardProduct" ) { // TODO: I don't think we need to specify GcRewardProduct here explicitly...
+                    if ( fieldType == "VariableStringSize") {
                         reader.Align( 0x4 );
                     }
 
@@ -656,7 +652,6 @@ namespace libMBIN
         public void SerializeList( BinaryWriter writer, IList list, long listHeaderPosition, ref List<Tuple<long, object>> additionalData, int addtDataIndex, UInt32 listEnding = (UInt32) 0xAAAAAA01 ) {
             // first thing we want to do is align the writer with the location of the first element of the list
             if ( list.Count != 0 ) {
-                string[] NMSStringNames = { "NMSString0x10", "NMSString0x20", "NMSString0x40", "NMSString0x80", "NMSString0x100" };
                 // if the class has no alignment value associated with it, set a default value
                 // Note: This will not work if the Type has a NMS Attribute defined (it will default to an alignment of 0x4)
                 int alignment_default = 0x4;
@@ -668,10 +663,6 @@ namespace libMBIN
                     alignment_default = 0x1;
                 }
                 int alignment = list[0].GetType().GetCustomAttribute<NMSAttribute>()?.Alignment ?? alignment_default;
-                // NMSString0xXX will get a default value of 0x4, but we want it to be 0x8 in lists.
-                if (NMSStringNames.Contains(list[0].GetType().Name)) {
-                    alignment = 0x8;
-                }
                 writer.Align(alignment, list[0].GetType().Name );
             }
 
@@ -832,7 +823,6 @@ namespace libMBIN
             if ( settings?.DefaultValue != null ) {
                 value = settings.DefaultValue;
             }
-
             switch (fieldType.Name)
             {
                 case "String":
@@ -885,7 +875,11 @@ namespace libMBIN
                         i = 0;
                         foreach ( var template in templates ) {
                             EXmlBase data = SerializeEXmlValue( listType, field, settings, template );
-                            data.Name = null;
+                            if (typeof(NMS.INMSString).IsAssignableFrom(listType)) {
+                                data.Name = listType.Name;
+                            } else {
+                                data.Name = null;
+                            }
 
                             listProperty.Elements.Add( data );
                         }
@@ -903,6 +897,12 @@ namespace libMBIN
                     }
                     return null;
                 default:
+                    if( typeof(NMS.INMSString).IsAssignableFrom(fieldType))
+                    {
+                        // We will shortcut the deserialization by simply assigning the value
+                        valueString = ((NMS.INMSString)value).StringValue();
+                        break;
+                    }
                     if ( fieldType.BaseType.Name == "NMSTemplate" ) {
                         NMSTemplate template;
                         if ( value is null ) {
@@ -928,6 +928,13 @@ namespace libMBIN
                         foreach ( var template in array ) {
                             EXmlBase data = SerializeEXmlValue( arrayType, field, settings, template );
                             data.Name = names[i++];
+                            /*
+                            // We can have this on but it may be a bit weird...
+                            if (typeof(NMS.INMSString).IsAssignableFrom(arrayType)) {
+                                if (data.Name == null) {
+                                    data.Name = arrayType.Name;
+                                }
+                            }*/
 
                             arrayProperty.Elements.Add( data );
                         }
@@ -1126,7 +1133,11 @@ namespace libMBIN
                     }
                     return list;
                 default:
-                    if (field.FieldType.IsArray && field.FieldType.GetElementType().BaseType.Name == "NMSTemplate") {
+                    if (typeof(NMS.INMSString).IsAssignableFrom(fieldType))
+                    {
+                        return Activator.CreateInstance(fieldType, xmlProperty.Value);
+                    }
+                    if (field.FieldType.IsArray && field.FieldType.GetElementType().BaseType.Name == "NMSTemplate" && !typeof(NMS.INMSString).IsAssignableFrom(field.FieldType.GetElementType())) {
                         int length = GetArrayLength( field.Name, settings );
                         Array array = Array.CreateInstance(field.FieldType.GetElementType(), length);
                         //var data = xmlProperty.Elements.OfType<EXmlProperty>().ToList();
@@ -1234,7 +1245,7 @@ namespace libMBIN
                         FieldInfo field = templateType.GetField( xmlProperty.Name );
                         object fieldValue = null;
                         DebugLogPropertyName( xmlProperty.Name );
-                        if ( field.FieldType == typeof( NMSTemplate ) || field.FieldType.BaseType == typeof( NMSTemplate ) ) {
+                        if ( (field.FieldType == typeof( NMSTemplate ) || field.FieldType.BaseType == typeof( NMSTemplate )) && !typeof(NMS.INMSString).IsAssignableFrom(field.FieldType)) {
                             fieldValue = DeserializeEXml( xmlProperty );
                         } else {
                             Type fieldType = field.FieldType;

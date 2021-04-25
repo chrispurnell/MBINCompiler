@@ -14,28 +14,20 @@ namespace libMBIN.NMS.GameComponents
         /* 0x008 */ public ulong StartTimeUTC;
         /* 0x010 */ public ulong EndTimeUTC;
         /* 0x018 */ public ulong Hash;
-        [NMS(Size = 0x20)]
-        /* 0x020 */ public string Title;
-        [NMS(Size = 0x20)]
-        /* 0x040 */ public string Subtitle;
-        [NMS(Size = 0x20)]
-        /* 0x060 */ public string Description;
+        /* 0x020 */ public NMSString0x20 Title;
+        /* 0x040 */ public NMSString0x20 Subtitle;
+        /* 0x060 */ public NMSString0x20 Description;
         /* 0x080 */ public GcGameMode GameMode;
-        [NMS(Size = 0x20)]
-        /* 0x084 */ public string SeasonalUAOverride;
+        /* 0x084 */ public NMSString0x20 SeasonalUAOverride;
         [NMS(Size = 0x4, Ignore = true)]
         /* 0x0A4 */ public byte[] PaddingA4;
         /* 0x0A8 */ public ulong UAOverrideValue;
-        [NMS(Size = 0x10)]
-        /* 0x0B0 */ public string FinalReward;
-        [NMS(Size = 0x200)]
-        /* 0x0C0 */ public string FinalRewardDescription;
+        /* 0x0B0 */ public NMSString0x10 FinalReward;
+        /* 0x0C0 */ public NMSString0x200 FinalRewardDescription;
         /* 0x2C0 */ public TkTextureResource MainIcon;
         /* 0x344 */ public int SeasonNumber;
-        [NMS(Size = 0x20)]
-        /* 0x348 */ public string SeasonName;
-        [NMS(Size = 0x20)]
-        /* 0x368 */ public string SeasonNameUpper;
+        /* 0x348 */ public NMSString0x20 SeasonName;
+        /* 0x368 */ public NMSString0x20 SeasonNameUpper;
         /* 0x388 */ public int StartingSuitSlots;
         /* 0x38C */ public int StartingSuitTechSlots;
         /* 0x390 */ public int StartingSuitCargoSlots;

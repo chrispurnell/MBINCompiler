@@ -9,8 +9,7 @@ namespace libMBIN.NMS.GameComponents
     public class GcSolarSystemData : NMSTemplate
     {
         /* 0x0000 */ public GcSeed Seed;
-        [NMS(Size = 0x80)]
-        /* 0x0010 */ public string Name;
+        /* 0x0010 */ public NMSString0x80 Name;
         /* 0x0090 */ public GcSolarSystemClass Class;
         /* 0x0094 */ public GcGalaxyStarTypes StarType;
         /* 0x0098 */ public int Planets;
@@ -22,8 +21,7 @@ namespace libMBIN.NMS.GameComponents
         /* 0x03A0 */ public int[] PlanetOrbits;
         /* 0x03C0 */ public int PrimePlanets;
         /* 0x03D0 */ public Vector3f SunPosition;
-        [NMS(Size = 0x10)]
-        /* 0x03E0 */ public string AsteroidSubstanceID;
+        /* 0x03E0 */ public NMSString0x10 AsteroidSubstanceID;
         /* 0x03F0 */ public int NumTradeRoutes;
         /* 0x03F4 */ public int NumVisibleTradeRoutes;
         /* 0x03F8 */ public int MaxNumFreighters;

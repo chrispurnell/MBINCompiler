@@ -8,8 +8,7 @@ namespace libMBIN.NMS.GameComponents
     {
         public GcUniverseAddressData UniverseAddress;
         public GcGameMode GameMode;
-        [NMS(Size = 0x20)]
-        public string UserId;
+        public NMSString0x20 UserId;
         public Vector3f Position;
     }
 }
